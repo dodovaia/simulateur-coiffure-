@@ -9,15 +9,15 @@
 <div class="field"><div class="row"><label for="capital">Capital du salon et du contenu</label><output id="capitalOut" class="number"></output></div><input id="capital" type="range" min="20000" max="300000" step="5000" value="150000"></div>
 <div class="field"><div class="row"><label for="nomade">Dont matériel professionnel nomade</label><output id="nomadeOut" class="number"></output></div><input id="nomade" type="range" min="0" max="30000" step="1000" value="5000"></div>
 <div class="field"><label for="salaries">Nombre de salariés</label><select id="salaries"><option value="0">0 salarié</option><option value="1" selected>1 salarié</option><option value="2">2 salariés</option><option value="3">3 salariés</option><option value="4">4 salariés</option><option value="5">5 salariés</option></select></div>
-<h2>2. Sélectionner les garanties et franchises</h2><div id="guarantees"></div>
+<div class="field"><label for="ca">Chiffre d’affaires annuel prévisionnel</label><select id="ca"><option value="40000">40 000 €</option><option value="80000" selected>80 000 €</option><option value="120000">120 000 €</option><option value="200000">200 000 €</option><option value="300000">300 000 €</option></select><p class="muted">Le chiffre d’affaires influence notamment l’exposition en responsabilité civile et la perte d’exploitation.</p></div><h2>2. Sélectionner les garanties et franchises</h2><div id="guarantees"></div>
 <p class="muted">La RC auto est obligatoire si un véhicule est utilisé. La mutuelle collective est obligatoire pour l'employeur (dispenses possibles) et la prévoyance dépend des dispositions de la branche. Les autres protections professionnelles sont, en principe, facultatives, sous réserve d'exigences contractuelles spécifiques.</p></section>
 <section class="panel"><h2>3. Résultat estimatif et franchises</h2><div class="result"><span>Budget mensuel indicatif</span><div><strong id="monthly">—</strong></div><p id="annual">—</p></div><table><thead><tr><th style="text-align:left;padding:10px 2px">Garantie</th><th style="text-align:right;padding:10px 2px">Prime</th><th style="text-align:right;padding:10px 2px">Franchise indicative</th></tr></thead><tbody id="details"></tbody></table><p class="muted"><b>Franchise :</b> part du sinistre restant à votre charge. Exemple : dommage indemnisable de 650 € avec 150 € de franchise = 500 € d'indemnisation, avant tout autre plafond ou abattement.</p><p class="muted"><b>Catastrophes naturelles :</b> franchise légale ou contractuelle spécifique à vérifier, distincte des 300 € simulés pour les sinistres ordinaires.</p>
 <div class="actions"><button class="btn" onclick="window.print()">Imprimer / Enregistrer en PDF</button><button class="btn secondary" id="copy">Copier la simulation</button></div>
-<p id="copyStatus" role="status" class="muted"></p><p class="muted"><b>Simulation pédagogique, pas un devis.</b> Coûts et taux purement hypothétiques, sans tarification d'assureur. Les garanties, franchises, exclusions et disponibilités à La Réunion doivent être vérifiées. L’option « Sans franchise » est une hypothèse de simulation, sans garantie de disponibilité chez un assureur ; son choix majore fictivement la prime de 30 %. Les autres ajustements de prime sont également fictifs. Les franchises affichées ne sont pas des conditions d’assureur. Le capital nomade est inclus dans le capital global et ne doit pas être compté deux fois.</p></section></main>
-<footer>AssistIA Courtage · Outil de démonstration, sans collecte ni transmission de données client.</footer>
+<p id="copyStatus" role="status" class="muted"></p><p class="muted"><b>Simulation pédagogique, pas un devis.</b> Estimations calibrées sur des fourchettes publiques 2026, et non des barèmes d'assureur. L'assurance automobile dépend du véhicule, du conducteur et du bonus-malus. La prévoyance employeur est une provision à ajuster selon le salaire et le contrat. Les garanties, franchises, exclusions et disponibilités à La Réunion doivent être vérifiées. L’option « Sans franchise » est une hypothèse de simulation, sans garantie de disponibilité chez un assureur ; son choix majore fictivement la prime de 30 %. Les autres ajustements de prime sont également fictifs. Les franchises affichées ne sont pas des conditions d’assureur. Le capital nomade est inclus dans le capital global et ne doit pas être compté deux fois.</p></section></main>
+<footer>AssistIA Courtage · Estimations indicatives 2026 : <a href="https://www.coover.fr/assurance-multirisque-professionnelle/metiers/salon-de-coiffure" target="_blank" rel="noopener">Multirisque</a> · <a href="https://www.rcpro.com/rc-pro-coiffeur/" target="_blank" rel="noopener">RC Pro</a> · <a href="https://www.legifrance.gouv.fr/conv_coll/article/KALIARTI000051792914" target="_blank" rel="noopener">Mutuelle conventionnelle</a> · <a href="https://www.urssaf.fr/accueil/outils-documentation/taux-baremes/plafonds-securite-sociale.html" target="_blank" rel="noopener">PMSS</a>. Sans collecte ni transmission de données client.</footer>
 <script>
 const $=id=>document.getElementById(id);
-const euros=n=>new Intl.NumberFormat('fr-FR',{style:'currency',currency:'EUR',maximumFractionDigits:0}).format(n);
+const euros=n=>new Intl.NumberFormat('fr-FR',{style:'currency',currency:'EUR',minimumFractionDigits:Number.isInteger(n)?0:2,maximumFractionDigits:2}).format(n);
 const entries=[
  {key:'multi',label:'Multirisque professionnelle (optionnel)',checked:true,base:300},
  {key:'rc',label:'Responsabilité civile professionnelle (optionnel)',checked:true,base:150},
@@ -42,10 +42,22 @@ function factor(base,chosen){
 }
 let last='';
 function update(){
- const surface=+$('surface').value,capital=+$('capital').value,nomade=Math.min(+$('nomade').value,capital),salaries=+$('salaries').value;
+ const surface=+$('surface').value,capital=+$('capital').value,nomade=Math.min(+$('nomade').value,capital),salaries=+$('salaries').value,ca=+$('ca').value;
  $('nomade').max=Math.min(30000,capital);$('nomade').value=nomade;
  $('surfaceOut').textContent=surface+' m²';$('capitalOut').textContent=euros(capital);$('nomadeOut').textContent=euros(nomade);
- const prices={multi:Math.round(40+surface*.65+capital*.0012),rc:25+salaries*10,nomade:Math.round(10+nomade*.003),perte:40,juridique:15,bris:20,auto:75,mutuelle:salaries*45,prevoyance:salaries*25};
+ // Calibrage indicatif 2026 : fourchettes publiques de courtiers/comparateurs, sans accès aux barèmes assureurs.
+ // Multirisque ajustée au capital de 150 000 € : le prix d'appel pour petits salons n'est pas représentatif.
+ const prices={
+ multi:Math.round(30+surface*.35+capital*.00055),
+ rc:Math.round(22+Math.max(0,ca-40000)*.00012+salaries*8),
+ nomade:Math.round(nomade*.04/12+5),
+ perte:Math.round(15+ca*.0001875),
+ juridique:15,
+ bris:15,
+ auto:75,
+ mutuelle:Math.round(salaries*(4005*.015*.59)*100)/100,
+ prevoyance:salaries*12
+ };
  let rows=[];
  entries.forEach(o=>{
    const box=$('g_'+o.key);
@@ -53,14 +65,14 @@ function update(){
    const selector=$('fr_'+o.key);
    if(selector)selector.disabled=!box.checked;
    const original=prices[o.key];
-   const amount=selector?Math.round(original*factor(o.base,+selector.value)):original;
+   const amount=selector?Math.round(original*factor(o.base,+selector.value)*100)/100:original;
    $('c_'+o.key).textContent=euros(amount)+'/mois';
    if(box.checked)rows.push({label:o.label,amount,franchise:getFranchise(o)});
  });
  const total=rows.reduce((a,v)=>a+v.amount,0);
  $('monthly').textContent=euros(total)+'/mois';$('annual').textContent=euros(total*12)+' / an';
  $('details').innerHTML=rows.map(r=>'<tr><td>'+r.label+'</td><td>'+euros(r.amount)+'</td><td style="text-align:right;font-size:12px">'+r.franchise+'</td></tr>').join('');
- last='Simulation assurance coiffure\nSurface : '+surface+' m²\nCapital : '+euros(capital)+'\nMatériel nomade : '+euros(nomade)+'\nSalariés : '+salaries+'\n'+rows.map(x=>x.label+' : '+euros(x.amount)+'/mois ; franchise : '+x.franchise).join('\n')+'\nTotal : '+euros(total)+'/mois ('+euros(total*12)+'/an)\nSimulation pédagogique non contractuelle.';
+ last='Simulation assurance coiffure\nSurface : '+surface+' m²\nCapital : '+euros(capital)+'\nMatériel nomade : '+euros(nomade)+'\nSalariés : '+salaries+'\nChiffre d’affaires : '+euros(ca)+'\n'+rows.map(x=>x.label+' : '+euros(x.amount)+'/mois ; franchise : '+x.franchise).join('\n')+'\nTotal : '+euros(total)+'/mois ('+euros(total*12)+'/an)\nSimulation pédagogique non contractuelle.';
 }
 document.querySelectorAll('input,select').forEach(el=>el.addEventListener('input',update));
 $('copy').onclick=async()=>{try{await navigator.clipboard.writeText(last);$('copyStatus').textContent='Simulation copiée.'}catch(e){$('copyStatus').textContent='Copie indisponible : utilisez l’impression PDF.'}};
