@@ -2,6 +2,7 @@
 <html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Simulateur pédagogique d'assurance pour salon de coiffure et activité à domicile"><title>AssistIA • Simulateur coiffure</title>
 <style>
 :root{font-family:Inter,system-ui,-apple-system,Segoe UI,sans-serif;color:#142438;background:#f3f6fa}*{box-sizing:border-box}body{margin:0}header{background:#112f49;color:#fff;padding:28px max(20px,calc((100vw - 1040px)/2))}header p{color:#c1d4e5;margin:6px 0 0}main{max-width:1040px;margin:24px auto;padding:0 16px;display:grid;grid-template-columns:1.2fr .8fr;gap:20px}.panel{background:#fff;border:1px solid #dde5ef;border-radius:16px;padding:23px;box-shadow:0 4px 16px #172b4510}.panel h2{font-size:18px;margin:0 0 18px}.row{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:9px}.row label{font-weight:600}.number{color:#005f99;font-weight:750}.field{margin-bottom:25px}input[type=range]{width:100%;accent-color:#0875bc}select{border:1px solid #c8d4df;border-radius:8px;background:white;padding:8px;font-size:15px;width:100%}.switch{display:flex;align-items:center;gap:10px;padding:13px 0;border-bottom:1px solid #edf1f5;cursor:pointer}.switch input{accent-color:#0875bc;width:18px;height:18px}.switch span{flex:1}.switch small{color:#607184}.guarantee{padding:12px 0;border-bottom:1px solid #edf1f5}.guarantee .switch{padding:0 0 8px;border:0}.franchise-setting{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:4px 0 6px 28px}.franchise-setting label{font-size:13px;color:#54677b}.franchise-setting select{width:auto;min-width:140px;font-size:13px}.franchise-setting select:disabled{background:#f3f6fa;color:#748394}.note{font-size:12px;color:#66788a}.result{background:#eaf4fc;padding:22px;border-radius:12px;margin-bottom:18px}.result strong{font-size:34px;color:#075e93}.result p{margin:5px 0;color:#46647a}table{border-collapse:collapse;width:100%;font-size:14px}td{padding:10px 2px;border-bottom:1px solid #e5edf2}td:last-child{text-align:right;font-variant-numeric:tabular-nums;font-weight:650}.muted{color:#66788a;font-size:12px;line-height:1.6}.btn{border:0;border-radius:9px;background:#0875bc;color:white;padding:12px 15px;font-weight:650;cursor:pointer}.btn.secondary{background:#e7f1f9;color:#075e93}button:focus-visible,input:focus-visible{outline:3px solid #fba62b;outline-offset:2px}.actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:16px}footer{max-width:1040px;margin:20px auto 35px;padding:0 16px;color:#6d7b88;font-size:12px}@media(max-width:760px){main{grid-template-columns:1fr}.panel{padding:18px}}@media print{header{color:black;background:white;padding:15px}main{display:block}.panel{box-shadow:none;break-inside:avoid;margin-bottom:20px}.actions,input[type=range],footer{display:none}}
+input[type=number]{width:100%;border:1px solid #c8d4df;border-radius:8px;padding:9px;font:inherit}.auto-module{margin-top:28px;border-top:2px solid #c8dfee;padding-top:22px}fieldset{border:1px solid #dde5ef;border-radius:10px;padding:14px;min-width:0}legend{font-weight:650}.auto-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.auto-grid label{font-size:13px;font-weight:600}.auto-grid input,.auto-grid select{margin-top:6px}summary{cursor:pointer;color:#075e93;font-size:13px;padding:8px 0}details{font-size:13px;line-height:1.6}.method{margin-top:16px}th,td{overflow-wrap:anywhere}th{font-size:12px}td{vertical-align:top}td:nth-child(2){white-space:nowrap;text-align:right}.franchise-setting{flex-wrap:wrap}@media(max-width:420px){.auto-grid{grid-template-columns:1fr}.franchise-setting{padding-left:0}}@media print{@page{margin:12mm}body{background:white;font-size:10pt}main{max-width:none;margin:0;padding:0}.panel{break-inside:auto;border:0;padding:0}fieldset,.guarantee,tr{break-inside:avoid}details>*{display:block!important}details>summary{display:block!important}footer{display:block}input[type=range]{display:none}select,input[type=number]{appearance:none;border:0;padding:2px;color:#000}a{color:#000}.result strong{font-size:25px}h2{break-after:avoid}.auto-grid{grid-template-columns:1fr 1fr}header h1{font-size:22px!important}}
 </style></head><body>
 <header><div style="font-size:13px;letter-spacing:.13em;font-weight:700;color:#91d3ff">ASSISTIA COURTAGE · DODOVA</div><h1 style="margin:9px 0;font-size:30px">Simulateur assurance coiffure</h1><p>Salon, prestations à domicile et protections professionnelles</p></header>
 <main><section class="panel"><h2>1. Définir l'activité</h2>
@@ -10,10 +11,34 @@
 <div class="field"><div class="row"><label for="nomade">Dont matériel professionnel nomade</label><output id="nomadeOut" class="number"></output></div><input id="nomade" type="range" min="0" max="30000" step="1000" value="5000"></div>
 <div class="field"><label for="salaries">Nombre de salariés</label><select id="salaries"><option value="0">0 salarié</option><option value="1" selected>1 salarié</option><option value="2">2 salariés</option><option value="3">3 salariés</option><option value="4">4 salariés</option><option value="5">5 salariés</option></select></div>
 <div class="field"><label for="ca">Chiffre d’affaires annuel prévisionnel</label><select id="ca"><option value="40000">40 000 €</option><option value="80000" selected>80 000 €</option><option value="120000">120 000 €</option><option value="200000">200 000 €</option><option value="300000">300 000 €</option></select><p class="muted">Le chiffre d’affaires influence notamment l’exposition en responsabilité civile et la perte d’exploitation.</p></div><h2>2. Sélectionner les garanties et franchises</h2><div id="guarantees"></div>
-<p class="muted">La RC auto est obligatoire si un véhicule est utilisé. La mutuelle collective est obligatoire pour l'employeur (dispenses possibles) et la prévoyance dépend des dispositions de la branche. Les autres protections professionnelles sont, en principe, facultatives, sous réserve d'exigences contractuelles spécifiques.</p></section>
-<section class="panel"><h2>3. Résultat estimatif et franchises</h2><div class="result"><span>Budget mensuel indicatif</span><div><strong id="monthly">—</strong></div><p id="annual">—</p></div><table><thead><tr><th style="text-align:left;padding:10px 2px">Garantie</th><th style="text-align:right;padding:10px 2px">Prime</th><th style="text-align:right;padding:10px 2px">Franchise indicative</th></tr></thead><tbody id="details"></tbody></table><p class="muted"><b>Franchise :</b> part du sinistre restant à votre charge. Exemple : dommage indemnisable de 650 € avec 150 € de franchise = 500 € d'indemnisation, avant tout autre plafond ou abattement.</p><p class="muted"><b>Catastrophes naturelles :</b> franchise légale ou contractuelle spécifique à vérifier, distincte des 300 € simulés pour les sinistres ordinaires.</p>
+<section id="automobile" class="auto-module"><h2>3. Assurance automobile</h2>
+<label class="switch"><input type="checkbox" id="vehicleUsed" checked><span>Un véhicule est utilisé pour l’activité</span></label>
+<p class="muted">La RC automobile est obligatoire pour un véhicule soumis à obligation d’assurance. Décocher ici signifie seulement qu’aucun véhicule n’entre dans cette simulation ; cela ne dispense pas d’assurer un véhicule conservé.</p>
+<fieldset id="autoFields"><legend>Véhicules de même profil</legend><div class="auto-grid">
+<label>Formule de base (options ajoutables)<select id="autoFormula"><option value="tiers">Tiers</option><option value="extended">Tiers étendu</option><option value="all" selected>Tous risques</option></select></label>
+<label>Valeur actuelle par véhicule (€)<input id="vehicleValue" type="number" min="1000" max="150000" step="500" value="20000"></label>
+<label>Âge du véhicule (années)<input id="vehicleAge" type="number" min="0" max="40" value="5"></label>
+<label>Bonus-malus (CRM)<input id="vehicleBonus" type="number" min="0.5" max="3.5" step="0.01" value="0.70"></label>
+<label>Nombre de véhicules<input id="vehicleCount" type="number" min="1" max="10" value="1"></label>
+<label>Usage déclaré<select id="vehicleUsage"><option value="1">Privé et trajet domicile-travail</option><option value="1.25" selected>Tournées professionnelles / visites clients</option><option value="1.45">Usage professionnel intensif</option></select></label>
+</div><p class="muted">Pour la coiffure itinérante, déclarer les tournées professionnelles. Profil simplifié : conducteur expérimenté, voiture ou utilitaire léger standard, France. Profils différents : simulations séparées ; aucune remise flotte supposée.</p>
+<div id="autoGuarantees"></div>
+<label for="autoContent">Plafond de contenu professionnel par véhicule</label><select id="autoContent"><option value="1000">1 000 €</option><option value="3000" selected>3 000 €</option><option value="5000">5 000 €</option><option value="10000">10 000 €</option></select>
+<p class="muted">Contenu : extension illustrative pour le matériel transporté, sans cumul d’indemnisation avec le matériel nomade. Ne couvre pas automatiquement un véhicule aménagé en salon ; adaptation et accueil du public à déclarer.</p>
+<p id="autoSubtotal" class="number" role="status"></p>
+</fieldset>
+<details class="method"><summary>Hypothèses tarifaires et références auto — consultées le 13 novembre 2026</summary>
+<p>Montants annuels de référence, enveloppe TTC indicative par véhicule : RC 360 €, vol 90 €, incendie 45 €, glace 65 €, DTA 240 €, conducteur 45 €, assistance 45 €, événements naturels 35 €, contenu 4 % du plafond. Ce sont des hypothèses de calcul, jamais des tarifs ou devis d’assureur.</p>
+<p>RC : base × CRM × usage. Dommages : base × (valeur / 20 000)^0,65 × (1 + 0,015 × âge, âge plafonné à 20 ans) × (0,7 + 0,3 × CRM) × usage. Conducteur et assistance : forfaits. Contenu : 4 % × plafond × usage. Franchise : coefficient 1 au niveau de référence ; 1,30 sans franchise pour le vitrage ; sinon 1 + 0,18 × (franchise de référence − franchise choisie) / max(franchise de référence, 150), borné entre 0,72 et 1,35. La provision Cat Nat est incluse dans les lignes dommages ; elle ne correspond pas au calcul réel des surprimes légales. Puis multiplication par le nombre de véhicules. Calcul arrondi au centime mensuel par ligne ; annuel = mensuel × 12. Le CRM est appliqué ici de manière simplifiée et ne reproduit pas les règles de tarification d’un assureur.</p>
+<p>Repère de marché : France Assureurs publie une prime moyenne 2024 de 480 € HT/an pour un véhicule de première catégorie en mono-contrat. Cette moyenne de particuliers ne constitue pas un tarif professionnel ni une moyenne locale à La Réunion ; aucune actualisation 2026 automatique n’est appliquée.</p>
+<ul><li><a href="https://www.franceassureurs.fr/nos-chiffres-cles/assurance-de-dommages-et-responsabilite/lassurance-automobile-des-particuliers-en-2024">France Assureurs : statistiques 2024</a></li>
+<li><a href="https://www.service-public.gouv.fr/particuliers/vosdroits/F31258">Service Public : RC automobile obligatoire (vérifié le 10 août 2026)</a></li>
+<li><a href="https://www.service-public.gouv.fr/particuliers/vosdroits/F2622">Service Public : garanties facultatives (20 mars 2026)</a></li>
+<li><a href="https://www.service-public.gouv.fr/particuliers/vosdroits/F2706">Service Public : franchises, dont catastrophes naturelles (14 avril 2025)</a></li></ul>
+</details></section><p class="muted">La RC auto est obligatoire si un véhicule est utilisé. La mutuelle collective est obligatoire pour l'employeur (dispenses possibles) et la prévoyance dépend des dispositions de la branche. Les autres protections professionnelles sont, en principe, facultatives, sous réserve d'exigences contractuelles spécifiques.</p></section>
+<section class="panel"><h2>4. Résultat estimatif et franchises</h2><div class="result"><span>Budget mensuel indicatif</span><div><strong id="monthly">—</strong></div><p id="annual">—</p></div><table><thead><tr><th style="text-align:left;padding:10px 2px">Garantie</th><th style="text-align:right;padding:10px 2px">Prime / mois</th><th style="text-align:right;padding:10px 2px">Franchise indicative</th></tr></thead><tbody id="details"></tbody></table><p class="muted"><b>Franchise :</b> part du sinistre restant à votre charge. Exemple : dommage indemnisable de 650 € avec 150 € de franchise = 500 € d'indemnisation, avant tout autre plafond ou abattement.</p><p class="muted"><b>Catastrophes naturelles :</b> franchise légale ou contractuelle spécifique à vérifier, distincte des 300 € simulés pour les sinistres ordinaires.</p>
 <div class="actions"><button class="btn" onclick="window.print()">Imprimer / Enregistrer en PDF</button><button class="btn secondary" id="copy">Copier la simulation</button></div>
-<p id="copyStatus" role="status" class="muted"></p><p class="muted"><b>Simulation pédagogique, pas un devis.</b> Estimations calibrées sur des fourchettes publiques 2026, et non des barèmes d'assureur. L'assurance automobile dépend du véhicule, du conducteur et du bonus-malus. La prévoyance employeur est une provision à ajuster selon le salaire et le contrat. Les garanties, franchises, exclusions et disponibilités à La Réunion doivent être vérifiées. L’option « Sans franchise » est une hypothèse de simulation, sans garantie de disponibilité chez un assureur ; son choix majore fictivement la prime de 30 %. Les autres ajustements de prime sont également fictifs. Les franchises affichées ne sont pas des conditions d’assureur. Le capital nomade est inclus dans le capital global et ne doit pas être compté deux fois.</p></section></main>
+<p id="copyStatus" role="status" class="muted"></p><p class="muted"><b>Simulation pédagogique, pas un devis.</b> Estimations calibrées sur des fourchettes publiques 2026, et non des barèmes d'assureur. L'assurance automobile dépend du véhicule, du conducteur et du bonus-malus. La prévoyance employeur est une provision à ajuster selon le salaire et le contrat. Les garanties, franchises, exclusions et disponibilités à La Réunion doivent être vérifiées. L’option « Sans franchise » est une hypothèse de simulation, sans garantie de disponibilité chez un assureur ; son choix majore fictivement la prime de 30 %. En automobile, elle est proposée uniquement pour le bris de glace. Les autres ajustements de prime sont également fictifs. Les franchises affichées ne sont pas des conditions d’assureur. Le capital nomade est inclus dans le capital global et ne doit pas être compté deux fois.</p></section></main>
 <footer>AssistIA Courtage · Estimations indicatives 2026 : <a href="https://www.coover.fr/assurance-multirisque-professionnelle/metiers/salon-de-coiffure" target="_blank" rel="noopener">Multirisque</a> · <a href="https://www.rcpro.com/rc-pro-coiffeur/" target="_blank" rel="noopener">RC Pro</a> · <a href="https://www.legifrance.gouv.fr/conv_coll/article/KALIARTI000051792914" target="_blank" rel="noopener">Mutuelle conventionnelle</a> · <a href="https://www.urssaf.fr/accueil/outils-documentation/taux-baremes/plafonds-securite-sociale.html" target="_blank" rel="noopener">PMSS</a>. Sans collecte ni transmission de données client.</footer>
 <script>
 const $=id=>document.getElementById(id);
@@ -25,20 +50,65 @@ const entries=[
  {key:'perte',label:"Perte d'exploitation (optionnel)",checked:true,base:null},
  {key:'juridique',label:'Protection juridique (optionnel)',checked:true,base:null},
  {key:'bris',label:'Bris de machine (optionnel)',checked:true,base:250},
- {key:'auto',label:'Véhicule professionnel — RC obligatoire si utilisé',checked:true,base:null},
  {key:'mutuelle',label:'Mutuelle collective du salarié (obligatoire, sauf dispense)',checked:true,base:null},
  {key:'prevoyance',label:'Prévoyance collective coiffure (obligatoire selon régime de branche)',checked:true,base:null}
 ];
 const options=[0,150,250,300,500,1000];
 const franchiseHTML=o=>o.base===null?'<div class="franchise-setting"><label>Franchise / délai</label><span class="note" id="f_'+o.key+'">Selon contrat</span></div>':'<div class="franchise-setting"><label for="fr_'+o.key+'">Franchise par sinistre</label><select id="fr_'+o.key+'" aria-label="Franchise '+o.label+'">'+options.map(v=>'<option value="'+v+'" '+(v===o.base?'selected':'')+'>'+(v===0?'Sans franchise':euros(v))+'</option>').join('')+'</select></div>';
 $('guarantees').innerHTML=entries.map(o=>'<div class="guarantee"><label class="switch"><input type="checkbox" id="g_'+o.key+'" '+(o.checked?'checked':'')+'><span>'+o.label+'</span><small id="c_'+o.key+'"></small></label>'+franchiseHTML(o)+'</div>').join('');
-const fixedLabels={perte:'Carence indicative : 3 jours',juridique:'Selon contrat',auto:'Selon garanties auto',mutuelle:'Pas de franchise dommages',prevoyance:'Carence / franchise selon régime'};
+const fixedLabels={perte:'Carence indicative : 3 jours',juridique:'Selon contrat',mutuelle:'Pas de franchise dommages',prevoyance:'Carence / franchise selon régime'};
 const getFranchise=o=>o.base===null?(fixedLabels[o.key]||'Selon contrat'):(+$('fr_'+o.key).value===0?'Sans franchise':euros(+$('fr_'+o.key).value));
 function factor(base,chosen){
   // Purely illustrative non-insurer sensitivity. No-franchise is a selectable simulation, not a guaranteed available product.
   if(chosen===base)return 1;
   if(chosen===0)return 1.3;
   return Math.max(.72,Math.min(1.35,1+0.18*(base-chosen)/Math.max(base,150)));
+}
+const autoEntries=[
+{key:'rca',label:'RC automobile obligatoire',base:360,fixed:'Pas de franchise simulée',cover:'Dommages corporels et matériels causés aux tiers ; ni vos blessures ni votre véhicule.',ex:['Dommages au véhicule assuré et blessures du conducteur hors garantie dédiée.','Recours de l’assureur possibles selon les circonstances et le contrat ; protection des victimes préservée.']},
+{key:'vol',label:'Vol / tentative de vol',base:90,fr:300,cover:'Véhicule volé ou endommagé lors d’une tentative, valeur expertisée dans la limite de la valeur déclarée.',ex:['Vol sans effraction ou preuves requises selon contrat.','Clés laissées dans le véhicule, défaut des protections exigées selon contrat.']},
+{key:'fire',label:'Incendie / explosion',base:45,fr:300,cover:'Dommages au véhicule dus au feu ou à une explosion.',ex:['Acte intentionnel.','Panne mécanique seule, sans dommage incendie garanti.']},
+{key:'glass',label:'Bris de glace',base:65,fr:100,zero:true,cover:'Pare-brise et vitrages prévus au contrat ; remplacement : franchise choisie.',ex:['Rayures et éléments non prévus (optiques, rétroviseurs, toit selon contrat).','Réparation parfois sans franchise : à vérifier au contrat.']},
+{key:'dta',label:'Dommages tous accidents (DTA)',base:240,fr:500,cover:'Accident responsable ou sans tiers identifié, collision et versement ; indemnisation selon expertise et vétusté.',ex:['Usure, panne mécanique, défaut d’entretien.','Faute intentionnelle, permis non valable, alcool ou stupéfiants selon contrat.']},
+{key:'driver',label:'Garantie du conducteur',base:45,fixed:'Seuil AIPP illustratif : 10 %',cover:'Préjudices corporels du conducteur, plafond illustratif 500 000 € ; seuil d’invalidité permanente de 10 %, sans franchise monétaire simulée.',ex:['Préjudices sous le seuil contractuel, plafonds et postes non prévus.','Alcool, stupéfiants, absence de permis selon contrat.']},
+{key:'assist',label:'Assistance panne / accident 0 km',base:45,fixed:'0 km — plafonds contractuels',cover:'Dépannage dès le domicile ; hypothèse remorquage plafonné à 200 €, sans véhicule de remplacement inclus.',ex:['Réparation, pièces, carburant et entretien à charge.','Intervention sans accord préalable ou dépassement des plafonds selon contrat.']},
+{key:'nature',label:'Événements naturels (tempête, grêle)',base:35,fr:300,cover:'Dommages directs de tempête et grêle selon conditions contractuelles ; régime Cat Nat distinct ci-dessous.',ex:['Phénomènes ou intensités hors définition contractuelle.','Catastrophe naturelle : arrêté requis pour le régime légal.']},
+{key:'content',label:'Contenu professionnel transporté',base:0,fr:250,cover:'Matériel professionnel transporté : accident, incendie ou vol avec effraction selon extension ; plafond choisi par véhicule.',ex:['Espèces, objets personnels, disparition inexpliquée.','Matériel visible, stationnement nocturne ou véhicule non verrouillé selon contrat.','Aucune double indemnisation avec le matériel nomade.']}
+];
+function autoSelect(o){return o.fr===undefined?'<span class="note">'+o.fixed+'</span>':'<label for="af_'+o.key+'">Franchise par sinistre</label><select id="af_'+o.key+'">'+(o.zero?[0,50,100,200]:[150,250,300,500,1000]).map(n=>'<option value="'+n+'" '+(n===o.fr?'selected':'')+'>'+(n===0?'Sans franchise (hypothèse)':euros(n))+'</option>').join('')+'</select>'}
+$('autoGuarantees').innerHTML=autoEntries.map(o=>'<div class="guarantee"><label class="switch"><input type="checkbox" id="ag_'+o.key+'"><span>'+o.label+'</span><small id="ac_'+o.key+'"></small></label><div class="franchise-setting">'+autoSelect(o)+'</div><details><summary>Couverture et exclusions types</summary><p>'+o.cover+'</p><ul>'+o.ex.map(t=>'<li>'+t+'</li>').join('')+'</ul><p class="muted">Exemples non exhaustifs : seules les conditions du contrat font foi.</p></details></div>').join('')+'<p id="catnat" class="muted"></p>';
+function setFormula(){
+ const f=$('autoFormula').value;
+ autoEntries.forEach(o=>{const included=o.key==='rca'||(f!=='tiers'&&['vol','fire','glass','nature'].includes(o.key))||(f==='all'&&o.key==='dta');const b=$('ag_'+o.key);b.checked=included||['driver','assist'].includes(o.key);b.disabled=included;});
+}
+setFormula();
+$('autoFormula').addEventListener('input',setFormula);
+function bounded(id,min,max){const e=$(id),n=Number(e.value);return Math.min(max,Math.max(min,Number.isFinite(n)&&e.value!==''?n:min))}
+function autoProfile(){return {value:bounded('vehicleValue',1000,150000),age:bounded('vehicleAge',0,40),crm:bounded('vehicleBonus',.5,3.5),count:Math.round(bounded('vehicleCount',1,10)),usage:+$('vehicleUsage').value}}
+function autoDescription(){const p=autoProfile();return !$('vehicleUsed').checked?'Automobile : aucun véhicule dans la simulation':'Automobile : '+$('autoFormula').selectedOptions[0].textContent+' ; '+p.count+' véhicule(s), valeur unitaire '+euros(p.value)+', âge '+p.age+' ans, CRM '+p.crm+', usage '+$('vehicleUsage').selectedOptions[0].textContent;}
+function autoRows(){
+ $('autoFields').disabled=!$('vehicleUsed').checked;
+ const active=$('vehicleUsed').checked,p=autoProfile(),rows=[];
+ const damage=['vol','fire','glass','dta','nature'].some(k=>$('ag_'+k).checked);
+ autoEntries.forEach(o=>{
+ const on=$('ag_'+o.key).checked;
+ const sel=$('af_'+o.key);if(sel)sel.disabled=!on;
+ $('ac_'+o.key).textContent=!active||!on?'Non retenue':($('ag_'+o.key).disabled?'Incluse dans la formule':'Option retenue');
+ if(!active||!on)return;
+ let annual=o.base;
+ if(o.key==='rca')annual*=p.crm*p.usage;
+ else if(o.key==='content')annual=+$('autoContent').value*.04*p.usage;
+ else if(o.fr!==undefined)annual*=Math.pow(p.value/20000,.65)*(1+.015*Math.min(p.age,20))*(.7+.3*p.crm)*p.usage;
+ if(sel)annual*=factor(o.fr,+sel.value);
+ rows.push({label:'Auto · '+o.label+' × '+p.count,amount:Math.round(annual*p.count/12*100)/100,franchise:sel?(+sel.value===0?'Sans franchise (hypothèse)':euros(+sel.value)+' / véhicule / sinistre'):o.fixed});
+ });
+ $('autoContent').disabled=!$('ag_content').checked;
+ const cat='Catastrophes naturelles : '+(damage?'extension légale associée aux garanties dommages, périmètre et arrêté à vérifier. Franchise auto : 380 € (1 520 € pour sécheresse/mouvements de terrain), ou franchise contractuelle supérieure pour usage professionnel ; aucun rachat simulé.':'non couverte dans cette formule sans dommages au véhicule.');
+ $('catnat').textContent=cat;
+ if(active&&damage)rows.push({label:'Auto · Catastrophes naturelles (cotisation incluse dans les dommages)',amount:0,franchise:'380 € minimum ; sécheresse 1 520 € ; usage pro : montant supérieur possible'});
+ const total=rows.reduce((n,r)=>n+r.amount,0);
+ $('autoSubtotal').textContent=active?'Sous-total auto : '+euros(total)+'/mois · '+euros(total*12)+'/an':'Aucune cotisation automobile simulée';
+ return rows;
 }
 let last='';
 function update(){
@@ -54,11 +124,10 @@ function update(){
  perte:Math.round(15+ca*.0001875),
  juridique:15,
  bris:15,
- auto:75,
  mutuelle:Math.round(salaries*(4005*.015*.59)*100)/100,
  prevoyance:salaries*12
  };
- let rows=[];
+ let rows=autoRows();
  entries.forEach(o=>{
    const box=$('g_'+o.key);
    if(['mutuelle','prevoyance'].includes(o.key)){box.disabled=salaries===0;box.checked=salaries>0}
@@ -71,9 +140,13 @@ function update(){
  });
  const total=rows.reduce((a,v)=>a+v.amount,0);
  $('monthly').textContent=euros(total)+'/mois';$('annual').textContent=euros(total*12)+' / an';
- $('details').innerHTML=rows.map(r=>'<tr><td>'+r.label+'</td><td>'+euros(r.amount)+'</td><td style="text-align:right;font-size:12px">'+r.franchise+'</td></tr>').join('');
- last='Simulation assurance coiffure\nSurface : '+surface+' m²\nCapital : '+euros(capital)+'\nMatériel nomade : '+euros(nomade)+'\nSalariés : '+salaries+'\nChiffre d’affaires : '+euros(ca)+'\n'+rows.map(x=>x.label+' : '+euros(x.amount)+'/mois ; franchise : '+x.franchise).join('\n')+'\nTotal : '+euros(total)+'/mois ('+euros(total*12)+'/an)\nSimulation pédagogique non contractuelle.';
+ $('details').innerHTML=rows.map(r=>'<tr><td>'+r.label+'</td><td>'+(r.label.startsWith('Auto · Catastrophes')?'Incluse':euros(r.amount))+'</td><td style="text-align:right;font-size:12px">'+r.franchise+'</td></tr>').join('');
+ last='Simulation assurance coiffure\n'+autoDescription()+'\nSurface : '+surface+' m²\nCapital : '+euros(capital)+'\nMatériel nomade : '+euros(nomade)+'\nSalariés : '+salaries+'\nChiffre d’affaires : '+euros(ca)+'\n'+rows.map(x=>x.label+' : '+euros(x.amount)+'/mois ; franchise : '+x.franchise).join('\n')+'\nTotal : '+euros(total)+'/mois ('+euros(total*12)+'/an)\nSimulation pédagogique non contractuelle.';
 }
+['vehicleValue','vehicleAge','vehicleBonus','vehicleCount'].forEach(id=>$(id).addEventListener('change',()=>{const p=autoProfile();$(id).value=({vehicleValue:p.value,vehicleAge:p.age,vehicleBonus:p.crm,vehicleCount:p.count})[id];update()}));
+let printDetails=[];
+window.addEventListener('beforeprint',()=>{printDetails=[...document.querySelectorAll('details')].map(el=>({el,open:el.open}));printDetails.forEach(x=>x.el.open=true)});
+window.addEventListener('afterprint',()=>printDetails.forEach(x=>x.el.open=x.open));
 document.querySelectorAll('input,select').forEach(el=>el.addEventListener('input',update));
 $('copy').onclick=async()=>{try{await navigator.clipboard.writeText(last);$('copyStatus').textContent='Simulation copiée.'}catch(e){$('copyStatus').textContent='Copie indisponible : utilisez l’impression PDF.'}};
 update();
